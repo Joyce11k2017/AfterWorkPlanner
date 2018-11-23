@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AfterWorkModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activities">
+          <Key>
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="activity_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="activity_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="time_limit" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ActivityUserMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="activity_id" Type="int" Nullable="false" />
+          <Property Name="time_limit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="from_time" Type="datetime" Nullable="false" />
+          <Property Name="to_time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="Edit" Type="bit" Nullable="false" />
+          <Property Name="Create" Type="bit" Nullable="false" />
+          <Property Name="Delete" Type="bit" Nullable="false" />
+          <Property Name="View" Type="bit" Nullable="false" />
+          <Property Name="created_dt_tm" Type="datetime" Nullable="false" />
+          <Property Name="modified_dt_tm" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_pwd" Type="nvarchar" MaxLength="50" />
+          <Property Name="created_dt_tm" Type="datetime" Nullable="false" />
+          <Property Name="modified_dt_tm" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ActivityUserMapping_ToTable">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ActivityUserMapping" Type="Self.ActivityUserMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ActivityUserMapping">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityUserMapping_ToTable_1">
+          <End Role="Activities" Type="Self.Activities" Multiplicity="1" />
+          <End Role="ActivityUserMapping" Type="Self.ActivityUserMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activities">
+              <PropertyRef Name="activity_id" />
+            </Principal>
+            <Dependent Role="ActivityUserMapping">
+              <PropertyRef Name="activity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AfterWorkModel1StoreContainer">
+          <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityUserMapping" EntityType="Self.ActivityUserMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActivityUserMapping_ToTable" Association="Self.FK_ActivityUserMapping_ToTable">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ActivityUserMapping" EntitySet="ActivityUserMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityUserMapping_ToTable_1" Association="Self.FK_ActivityUserMapping_ToTable_1">
+            <End Role="Activities" EntitySet="Activities" />
+            <End Role="ActivityUserMapping" EntitySet="ActivityUserMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Users" Association="Self.FK_Roles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AfterWorkModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created_dt_tm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modified_dt_tm" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Roles" Relationship="AfterWorkModel1.FK_Roles_Users" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="ActivityUserMappings" Relationship="AfterWorkModel1.FK_ActivityUserMapping_ToTable" FromRole="User" ToRole="ActivityUserMapping" />
+        </EntityType>
+        <EntityContainer Name="AfterWorkEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Roles" EntityType="AfterWorkModel1.Role" />
+          <AssociationSet Name="FK_Roles_Users" Association="AfterWorkModel1.FK_Roles_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <EntitySet Name="Activities" EntityType="AfterWorkModel1.Activity" />
+          <EntitySet Name="ActivityUserMappings" EntityType="AfterWorkModel1.ActivityUserMapping" />
+          <AssociationSet Name="FK_ActivityUserMapping_ToTable_1" Association="AfterWorkModel1.FK_ActivityUserMapping_ToTable_1">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="ActivityUserMapping" EntitySet="ActivityUserMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityUserMapping_ToTable" Association="AfterWorkModel1.FK_ActivityUserMapping_ToTable">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ActivityUserMapping" EntitySet="ActivityUserMappings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="Edit" Type="Boolean" Nullable="false" />
+          <Property Name="Create" Type="Boolean" Nullable="false" />
+          <Property Name="Delete" Type="Boolean" Nullable="false" />
+          <Property Name="View" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="AfterWorkModel1.FK_Roles_Users" FromRole="Role" ToRole="User" />
+          <Property Name="created_dt_tm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modified_dt_tm" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Roles_Users">
+          <End Type="AfterWorkModel1.User" Role="User" Multiplicity="1" />
+          <End Type="AfterWorkModel1.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="activity_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="activity_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="time_limit" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="ActivityUserMappings" Relationship="AfterWorkModel1.FK_ActivityUserMapping_ToTable_1" FromRole="Activity" ToRole="ActivityUserMapping" />
+        </EntityType>
+        <EntityType Name="ActivityUserMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="activity_id" Type="Int32" Nullable="false" />
+          <Property Name="time_limit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="from_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="to_time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Activity" Relationship="AfterWorkModel1.FK_ActivityUserMapping_ToTable_1" FromRole="ActivityUserMapping" ToRole="Activity" />
+          <NavigationProperty Name="User" Relationship="AfterWorkModel1.FK_ActivityUserMapping_ToTable" FromRole="ActivityUserMapping" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ActivityUserMapping_ToTable_1">
+          <End Type="AfterWorkModel1.Activity" Role="Activity" Multiplicity="1" />
+          <End Type="AfterWorkModel1.ActivityUserMapping" Role="ActivityUserMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="activity_id" />
+            </Principal>
+            <Dependent Role="ActivityUserMapping">
+              <PropertyRef Name="activity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityUserMapping_ToTable">
+          <End Type="AfterWorkModel1.User" Role="User" Multiplicity="1" />
+          <End Type="AfterWorkModel1.ActivityUserMapping" Role="ActivityUserMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ActivityUserMapping">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AfterWorkModel1StoreContainer" CdmEntityContainer="AfterWorkEntity">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(AfterWorkModel1.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="user_pwd" ColumnName="user_pwd" />
+          <ScalarProperty Name="created_dt_tm" ColumnName="created_dt_tm" />
+          <ScalarProperty Name="modified_dt_tm" ColumnName="modified_dt_tm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(AfterWorkModel1.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="Edit" ColumnName="Edit" />
+          <ScalarProperty Name="Create" ColumnName="Create" />
+          <ScalarProperty Name="Delete" ColumnName="Delete" />
+          <ScalarProperty Name="View" ColumnName="View" />
+          <ScalarProperty Name="created_dt_tm" ColumnName="created_dt_tm" />
+          <ScalarProperty Name="modified_dt_tm" ColumnName="modified_dt_tm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="IsTypeOf(AfterWorkModel1.Activity)">
+        <MappingFragment StoreEntitySet="Activities">
+          <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+          <ScalarProperty Name="activity_name" ColumnName="activity_name" />
+          <ScalarProperty Name="time_limit" ColumnName="time_limit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="ActivityUserMappings">
+            <EntityTypeMapping TypeName="AfterWorkModel1.ActivityUserMapping">
+              <MappingFragment StoreEntitySet="ActivityUserMapping">
+                <ScalarProperty Name="to_time" ColumnName="to_time" />
+                <ScalarProperty Name="from_time" ColumnName="from_time" />
+                <ScalarProperty Name="time_limit" ColumnName="time_limit" />
+                <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AfterWorkPlanner.Models.Activity>
+
+@{
+    ViewBag.Title = "Activity List";
+}
+
+<h2>Activity List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ActivityCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.activity_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.time_limit)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.activity_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.time_limit)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "ActivityEdit", new { id=item.activity_id }) |
+            @Html.ActionLink("Details", "ActivityDetails", new { id=item.activity_id }) |
+            @Html.ActionLink("Delete", "ActivityDelete", new { id=item.activity_id })
+        </td>
+    </tr>
+}
+
+</table>

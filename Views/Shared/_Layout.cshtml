@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Cool After Work Planner</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("AfterWorkPlanner", "UserList", "User", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @{ 
+                        if (Session["RoleName"] != null && Session["RoleName"].ToString() != "")
+                        {
+                            <li>@Html.ActionLink("UserDashboard", "UserList", "User")</li>
+                            if (Session["RoleName"].ToString() == "Admin")
+                            {
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin</a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("User", "UserList", "User")</li>
+                                        <li>@Html.ActionLink("Role", "RoleList", "Role")</li>
+                                    </ul>
+                                </li>
+                            }
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Activity</a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Activity List", "ActivityList", "Activity")</li>
+                                    <li>@Html.ActionLink("Activity User Mapping", "ActivityUserMappingList", "ActivityUserMapping")</li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Logout", "Login", "Login")</li>
+                        }
+                    }                    
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Cool After Work Planner</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

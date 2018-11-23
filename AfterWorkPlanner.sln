@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfterWorkPlanner", "AfterWorkPlanner.csproj", "{3B335D89-AE49-45CB-86CA-0E51C41621D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B335D89-AE49-45CB-86CA-0E51C41621D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B335D89-AE49-45CB-86CA-0E51C41621D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B335D89-AE49-45CB-86CA-0E51C41621D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B335D89-AE49-45CB-86CA-0E51C41621D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9FB1AE2-8DD6-4805-96C3-AF9DB10E5465}
+	EndGlobalSection
+EndGlobal

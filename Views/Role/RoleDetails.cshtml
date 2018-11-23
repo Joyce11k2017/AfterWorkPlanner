@@ -1,0 +1,82 @@
+﻿@model AfterWorkPlanner.Models.Role
+
+@{
+    ViewBag.Title = "Role Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Role</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.role_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.role_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Edit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Edit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Delete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Delete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.View)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.View)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_dt_tm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_dt_tm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modified_dt_tm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modified_dt_tm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.user_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.user_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.role_id }) |
+    @Html.ActionLink("Back to List", "RoleList")
+</p>

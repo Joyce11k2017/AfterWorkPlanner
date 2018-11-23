@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AfterWorkPlanner.Models.ActivityUserMapping>
+
+@{
+    ViewBag.Title = "Activity User Mapping List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ActivityUserMappingCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.user_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activity.activity_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.time_limit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.from_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.to_time)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.user_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activity.activity_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.time_limit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.from_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.to_time)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "ActivityUserMappingEdit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "ActivityUserMappingDetails", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "ActivityUserMappingDelete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,33 @@
+﻿@model AfterWorkPlanner.Models.User
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_pwd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_pwd)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "UserEdit", new { id = Model.user_id }) |
+    @Html.ActionLink("Back to List", "UserList")
+</p>

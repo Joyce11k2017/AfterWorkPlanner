@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AfterWorkPlanner.Models.User>
+
+@{
+    ViewBag.Title = "User List";
+}
+
+<h2>User List</h2>
+
+<p>
+    @{
+        if(Session["RoleName"] != null && Session["RoleName"].ToString() == "Admin")
+        {
+            Html.ActionLink("Create New User", "UserCreate");
+        }
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.user_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_dt_tm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modified_dt_tm)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_name)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.created_dt_tm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modified_dt_tm)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UserEdit", new { id=item.user_id }) |
+            @Html.ActionLink("Details", "UserDetails", new { id=item.user_id }) |
+            @Html.ActionLink("Delete", "UserDelete", new { id=item.user_id })
+        </td>
+    </tr>
+}
+
+</table>
